@@ -2,6 +2,7 @@
    MU CALCULATOR - FULLY MANUAL INPUT
    Energy Meter Calibration · ISO/IEC 17025
    Responsive: Mobile-first design
+   Version: 2.0 — MU Cap to CMC + Validation
    ============================================================ */
 
 :root {
@@ -22,6 +23,15 @@
     --shadow-md: 0 2px 8px rgba(0,0,0,0.08);
     --radius: 8px;
     --transition: 0.25s ease;
+    --danger: #b03030;
+    --danger-bg: #fef5f5;
+    --danger-border: #e8c8c8;
+    --warning: #b8733e;
+    --warning-bg: #fef9f3;
+    --warning-border: #e8d5b5;
+    --success: #1e6b1e;
+    --success-bg: #f2f9f2;
+    --success-border: #c8e0c8;
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -58,12 +68,14 @@ body {
 /* Job Info Grid */
 .job-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 6px 12px; font-size: clamp(0.75em, 1.5vw, 0.82em);
+    gap: 8px 12px; font-size: clamp(0.75em, 1.5vw, 0.82em);
 }
 .job-grid .jg-group { display: flex; flex-direction: column; gap: 2px; }
-.job-grid .jg-label { color: var(--text-light); font-size: 0.88em; }
-.job-grid input { padding: 5px 8px; border: 1px solid #d4c5a9; border-radius: 3px; font-size: 0.92em; background: #fffef9; width: 100%; }
+.job-grid .jg-label { color: var(--text-light); font-size: 0.86em; font-weight: 500; }
+.job-grid input { padding: 6px 8px; border: 1px solid #d4c5a9; border-radius: 3px; font-size: 0.9em; background: #fffef9; width: 100%; }
 .job-grid input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(184,115,62,0.12); }
+.job-grid .jg-cmc-group { background: #fefcf6; padding: 8px; border-radius: 4px; border: 2px solid var(--accent); }
+.job-grid .jg-cmc-label { font-weight: 700; color: var(--highlight); font-size: 0.82em; }
 
 /* Meter Info Grid */
 .meter-info-grid {
@@ -72,9 +84,10 @@ body {
     padding: 10px 14px; background: #fefcf7; border: 1px solid #ebe3d5; border-radius: 5px;
 }
 .meter-info-grid .mi-group { display: flex; flex-direction: column; gap: 2px; }
-.meter-info-grid .mi-label { color: var(--text-light); font-size: 0.88em; }
+.meter-info-grid .mi-label { color: var(--text-light); font-size: 0.86em; font-weight: 500; }
 .meter-info-grid input, .meter-info-grid select { padding: 5px 8px; border: 1px solid #d4c5a9; border-radius: 3px; font-size: 0.88em; background: #fffef9; width: 100%; max-width: 160px; }
 .meter-info-grid input:focus, .meter-info-grid select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(184,115,62,0.12); }
+.meter-info-grid input.invalid, .meter-info-grid select.invalid { border-color: var(--danger); background: var(--danger-bg); }
 
 /* Test Selector */
 .test-selector {
@@ -86,6 +99,7 @@ body {
 .test-selector .ts-label { font-size: 0.68em; color: #6b4d31; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
 .test-selector select, .test-selector input { padding: 5px 7px; border: 1px solid #c4a87a; border-radius: 4px; font-size: 0.82em; background: #fffef9; width: 100%; }
 .test-selector select:focus, .test-selector input:focus { outline: none; border-color: var(--highlight); box-shadow: 0 0 0 2px rgba(122,74,42,0.1); }
+.test-selector input.invalid, .test-selector select.invalid { border-color: var(--danger); background: var(--danger-bg); }
 
 /* Test Point Display */
 .test-point-display {
@@ -102,6 +116,7 @@ body {
     margin-top: 8px; font-family: 'SF Mono', 'Cascadia Code', 'Courier New', monospace;
     font-size: clamp(0.72em, 1.5vw, 0.82em); word-break: break-all; border-radius: 4px; overflow-x: auto; white-space: nowrap;
 }
+.readings-display.error { border-color: var(--danger); background: var(--danger-bg); }
 
 /* Input */
 .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px 14px; }
@@ -109,6 +124,10 @@ body {
 .input-group label { font-size: 0.73em; color: var(--text-light); font-weight: 500; }
 .input-group input { padding: 7px 9px; border: 1px solid #d4c5a9; border-radius: 4px; font-size: 0.85em; font-family: 'SF Mono', 'Courier New', monospace; background: #fefdf9; width: 100%; }
 .input-group input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(184,115,62,0.1); }
+.input-group input.invalid { border-color: var(--danger); background: var(--danger-bg); }
+.input-group .validation-msg { font-size: 0.68em; color: var(--danger); margin-top: 2px; display: none; }
+.input-group .validation-msg.show { display: block; }
+
 .btn-row { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
 .btn { padding: 9px 16px; border: none; border-radius: 5px; cursor: pointer; font-size: 0.82em; font-weight: 600; transition: var(--transition); white-space: nowrap; }
 .btn-primary { background: #7a4a2a; color: #fff; }
@@ -153,6 +172,19 @@ body {
 .calc-divider { border-top: 1px solid #e8dcc8; margin: 5px 0; padding-top: 3px; }
 .note { font-size: 0.7em; color: #a09080; font-style: italic; }
 
+/* CMC Validation Banner */
+.cmc-banner {
+    padding: 12px 14px; margin: 10px 0; border-radius: 6px; font-size: clamp(0.78em, 1.5vw, 0.85em);
+    font-weight: 600; text-align: center; line-height: 1.6;
+}
+.cmc-banner.pass {
+    background: var(--success-bg); border: 2px solid var(--success-border); color: var(--success);
+}
+.cmc-banner.capped {
+    background: var(--warning-bg); border: 2px solid var(--warning-border); color: var(--warning);
+}
+.cmc-banner .big { font-size: 1.2em; display: block; }
+
 /* Summary */
 .summary-card {
     background: linear-gradient(135deg, #fcf9f0, #fefdf8); border: 2px solid var(--accent);
@@ -170,6 +202,7 @@ body {
     font-size: clamp(0.85em, 1.8vw, 1em); line-height: 1.7;
 }
 .final-result .big { font-size: 1.5em; display: block; margin-top: 2px; }
+.final-result.capped { border-color: var(--warning); color: var(--warning); background: var(--warning-bg); }
 
 /* Excel Compare */
 .excel-compare h3 { color: var(--title); margin-bottom: 8px; font-size: clamp(0.85em, 2vw, 0.95em); border-bottom: 1px solid var(--line); padding-bottom: 6px; }
