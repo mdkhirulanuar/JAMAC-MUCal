@@ -9,23 +9,53 @@
 </head>
 <body>
 
-    <header class="header">
-        <h1>📐 Measurement Uncertainty</h1>
-        <p class="subtitle">Manual Calculation · Energy Meter Calibration</p>
-        <p class="badge">ISO/IEC 17025 · k=2 · 95% Confidence Level</p>
-        <div class="job-info-header" id="job-info-header"></div>
-    </header>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <button class="icon-btn" id="btn-menu" title="Menu" aria-label="Menu">☰</button>
+            <span class="app-title">MU Calculator</span>
+        </div>
+        <div class="top-bar-right">
+            <button class="icon-btn" id="btn-darkmode" title="Dark Mode" aria-label="Toggle dark mode">🌙</button>
+            <button class="icon-btn" id="btn-add-tab" title="Tambah Parameter Baru" aria-label="Tambah tab">➕</button>
+            <button class="icon-btn" id="btn-save" title="Simpan Project" aria-label="Simpan">💾</button>
+            <button class="icon-btn" id="btn-load" title="Muat Project" aria-label="Muat">📂</button>
+            <button class="icon-btn" id="btn-print" title="Cetak" aria-label="Cetak" onclick="window.print()">🖨️</button>
+        </div>
+    </div>
 
-    <main class="main-content">
-        <section class="param-card" id="job-card"></section>
-        <section class="param-card" id="meter-card"></section>
-        <section class="input-card" id="input-card"></section>
-        <section id="steps-container"></section>
-        <section id="summary-container"></section>
-        <section class="excel-compare" id="excel-compare"></section>
-    </main>
+    <!-- Side Menu -->
+    <div class="side-menu" id="side-menu">
+        <div class="side-menu-header">
+            <h3>📁 Projects Tersimpan</h3>
+            <button class="icon-btn" id="btn-menu-close" title="Tutup" aria-label="Tutup menu">✕</button>
+        </div>
+        <div class="side-menu-list" id="saved-projects-list">
+            <p class="empty-msg">Tiada project tersimpan</p>
+        </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
 
-    <footer class="footer" id="footer-info"></footer>
+    <!-- Tab Bar -->
+    <div class="tab-bar" id="tab-bar">
+        <!-- Filled by JS -->
+    </div>
+
+    <!-- Tab Content Container -->
+    <div class="tab-content" id="tab-content">
+        <!-- Filled by JS -->
+    </div>
+
+    <!-- Load Modal -->
+    <div class="modal" id="load-modal">
+        <div class="modal-content">
+            <h3>📂 Muat Project</h3>
+            <div class="modal-list" id="load-project-list"></div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="btn-load-cancel">Batal</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
