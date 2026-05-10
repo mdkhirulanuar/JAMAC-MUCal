@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>MU Calculator Pro - Energy Meter Calibration</title>
-    <meta name="description" content="Kalkulator Measurement Uncertainty (MU) untuk Energy Meter Calibration. Manual step-by-step calculation mengikut ISO/IEC 17025.">
+    <title>MU Validate Pro - Energy Meter Calibration</title>
+    <meta name="description" content="Measurement Uncertainty Validator untuk Energy Meter Calibration. Manual step-by-step calculation mengikut ISO/IEC 17025.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -12,46 +12,83 @@
 </head>
 <body>
 
-    <!-- Top Bar -->
-    <header class="top-bar">
-        <div class="top-bar-left">
-            <span class="logo">⚡</span>
-            <span class="app-title">MU Calculator Pro</span>
-            <span class="app-badge">ISO/IEC 17025</span>
-        </div>
-        <div class="top-bar-right">
-            <button class="icon-btn" id="btn-save" title="Simpan">💾</button>
-            <button class="icon-btn" id="btn-load" title="Muat">📂</button>
-            <button class="icon-btn" id="btn-add-tab" title="Tambah Parameter">➕</button>
-            <button class="icon-btn" id="btn-darkmode" title="Tema">🌙</button>
-            <button class="icon-btn print-btn" id="btn-print" title="Cetak" onclick="window.print()">🖨️</button>
-        </div>
-    </header>
-
-    <!-- Tab Bar -->
-    <nav class="tab-bar" id="tab-bar"></nav>
-
-    <!-- Tab Content -->
-    <main class="tab-content" id="tab-content"></main>
-
-    <!-- Footer -->
-    <footer class="footer-main">
-        <p>MU Calculator Pro v3.0 · Measurement Uncertainty for Energy Meter Calibration</p>
-    </footer>
-
-    <!-- Load Modal -->
-    <div class="modal" id="load-modal">
-        <div class="modal-card">
-            <div class="modal-header">
-                <h3>📂 Muat Project</h3>
-                <button class="modal-close" id="btn-load-cancel">✕</button>
+    <!-- ==================== SPLASH SCREEN ==================== -->
+    <div class="splash-screen" id="splash-screen">
+        <div class="splash-content">
+            <div class="splash-icon">
+                <span class="splash-logo">⚡</span>
+                <div class="splash-ring"></div>
+                <div class="splash-ring-2"></div>
             </div>
-            <div class="modal-list" id="load-project-list"></div>
+            <h1 class="splash-title">MU Validate Pro</h1>
+            <p class="splash-subtitle">Measurement Uncertainty · Energy Meter Calibration</p>
+            <div class="splash-loader">
+                <div class="splash-loader-bar"></div>
+            </div>
+            <p class="splash-version">ISO/IEC 17025 · v3.0</p>
         </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast"></div>
+    <!-- ==================== MAIN APP ==================== -->
+    <div class="app-container" id="app-container" style="display:none;">
+
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <span class="logo">⚡</span>
+                <span class="app-title">MU Validate Pro</span>
+                <span class="app-badge">ISO/IEC 17025</span>
+            </div>
+            <div class="top-bar-right">
+                <button class="icon-btn" id="btn-save" title="Simpan Project">💾</button>
+                <button class="icon-btn" id="btn-load" title="Muat Project">📂</button>
+                <button class="icon-btn" id="btn-add-tab" title="Tambah Parameter">➕</button>
+                <button class="icon-btn" id="btn-darkmode" title="Tukar Tema">🌙</button>
+                <button class="icon-btn print-btn" id="btn-print" title="Cetak Laporan" onclick="window.print()">🖨️</button>
+            </div>
+        </header>
+
+        <!-- Tab Bar -->
+        <nav class="tab-bar" id="tab-bar"></nav>
+
+        <!-- Tab Content -->
+        <main class="tab-content" id="tab-content"></main>
+
+        <!-- Footer -->
+        <footer class="footer-main">
+            <p>MU Validate Pro v3.0 · Measurement Uncertainty Validator for Energy Meter Calibration</p>
+        </footer>
+
+        <!-- Load Modal -->
+        <div class="modal" id="load-modal">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h3>📂 Muat Project</h3>
+                    <button class="modal-close" id="btn-load-cancel">✕</button>
+                </div>
+                <div class="modal-list" id="load-project-list"></div>
+            </div>
+        </div>
+
+        <!-- Save Modal -->
+        <div class="modal" id="save-modal">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h3>💾 Simpan Project</h3>
+                    <button class="modal-close" id="btn-save-cancel">✕</button>
+                </div>
+                <div class="form-group" style="margin-bottom:14px;">
+                    <label>Nama Project</label>
+                    <input type="text" id="save-project-name" placeholder="cth: JTSO0280043 - ATEC DTS353">
+                </div>
+                <button class="btn btn-primary" id="btn-save-confirm" style="width:100%;">Simpan</button>
+            </div>
+        </div>
+
+        <!-- Toast Notification -->
+        <div class="toast" id="toast"></div>
+
+    </div>
 
     <script src="script.js"></script>
 </body>
