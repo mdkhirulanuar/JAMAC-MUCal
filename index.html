@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Kalkulator MU - Manual Step-by-Step</title>
+    <title>Kalkulator MU - Energy Meter Calibration</title>
     <meta name="description" content="Kalkulator Measurement Uncertainty (MU) untuk Energy Meter Calibration. Manual step-by-step calculation mengikut ISO/IEC 17025.">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,41 +13,32 @@
         <h1>📐 Measurement Uncertainty</h1>
         <p class="subtitle">Manual Calculation · Energy Meter Calibration</p>
         <p class="badge">ISO/IEC 17025 · k=2 · 95% Confidence Level</p>
+        <div class="job-info-header" id="job-info-header"></div>
     </header>
 
     <main class="main-content">
 
-        <!-- Parameter Info Card -->
-        <section class="param-card" id="param-card">
-            <!-- Filled by JS -->
-        </section>
+        <!-- Job Info Card -->
+        <section class="param-card" id="job-card"></section>
 
-        <!-- Input Section -->
-        <section class="input-card" id="input-card">
-            <!-- Filled by JS -->
-        </section>
+        <!-- Meter Info + Test Parameter Card -->
+        <section class="param-card" id="meter-card"></section>
+
+        <!-- Input Readings & Components -->
+        <section class="input-card" id="input-card"></section>
 
         <!-- Steps Container -->
-        <section id="steps-container">
-            <!-- Filled by JS -->
-        </section>
+        <section id="steps-container"></section>
 
         <!-- Summary -->
-        <section id="summary-container">
-            <!-- Filled by JS -->
-        </section>
+        <section id="summary-container"></section>
 
         <!-- Comparison with Excel -->
-        <section class="excel-compare" id="excel-compare">
-            <!-- Filled by JS -->
-        </section>
+        <section class="excel-compare" id="excel-compare"></section>
 
     </main>
 
-    <footer class="footer">
-        <p>Data: JTSO0280043 · ATEC DTS353 · S/N: TC2500100</p>
-        <p>Reference Standard: Harnpu HC3100A · S/N: Z2102155</p>
-    </footer>
+    <footer class="footer" id="footer-info"></footer>
 
     <script src="script.js"></script>
 </body>
