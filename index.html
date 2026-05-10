@@ -3,59 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Kalkulator MU - Energy Meter Calibration</title>
+    <title>MU Calculator Pro - Energy Meter Calibration</title>
     <meta name="description" content="Kalkulator Measurement Uncertainty (MU) untuk Energy Meter Calibration. Manual step-by-step calculation mengikut ISO/IEC 17025.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <!-- Top Bar -->
-    <div class="top-bar">
+    <header class="top-bar">
         <div class="top-bar-left">
-            <button class="icon-btn" id="btn-menu" title="Menu" aria-label="Menu">☰</button>
-            <span class="app-title">MU Calculator</span>
+            <span class="logo">⚡</span>
+            <span class="app-title">MU Calculator Pro</span>
+            <span class="app-badge">ISO/IEC 17025</span>
         </div>
         <div class="top-bar-right">
-            <button class="icon-btn" id="btn-darkmode" title="Dark Mode" aria-label="Toggle dark mode">🌙</button>
-            <button class="icon-btn" id="btn-add-tab" title="Tambah Parameter Baru" aria-label="Tambah tab">➕</button>
-            <button class="icon-btn" id="btn-save" title="Simpan Project" aria-label="Simpan">💾</button>
-            <button class="icon-btn" id="btn-load" title="Muat Project" aria-label="Muat">📂</button>
-            <button class="icon-btn" id="btn-print" title="Cetak" aria-label="Cetak" onclick="window.print()">🖨️</button>
+            <button class="icon-btn" id="btn-save" title="Simpan">💾</button>
+            <button class="icon-btn" id="btn-load" title="Muat">📂</button>
+            <button class="icon-btn" id="btn-add-tab" title="Tambah Parameter">➕</button>
+            <button class="icon-btn" id="btn-darkmode" title="Tema">🌙</button>
+            <button class="icon-btn print-btn" id="btn-print" title="Cetak" onclick="window.print()">🖨️</button>
         </div>
-    </div>
-
-    <!-- Side Menu -->
-    <div class="side-menu" id="side-menu">
-        <div class="side-menu-header">
-            <h3>📁 Projects Tersimpan</h3>
-            <button class="icon-btn" id="btn-menu-close" title="Tutup" aria-label="Tutup menu">✕</button>
-        </div>
-        <div class="side-menu-list" id="saved-projects-list">
-            <p class="empty-msg">Tiada project tersimpan</p>
-        </div>
-    </div>
-    <div class="overlay" id="overlay"></div>
+    </header>
 
     <!-- Tab Bar -->
-    <div class="tab-bar" id="tab-bar">
-        <!-- Filled by JS -->
-    </div>
+    <nav class="tab-bar" id="tab-bar"></nav>
 
-    <!-- Tab Content Container -->
-    <div class="tab-content" id="tab-content">
-        <!-- Filled by JS -->
-    </div>
+    <!-- Tab Content -->
+    <main class="tab-content" id="tab-content"></main>
+
+    <!-- Footer -->
+    <footer class="footer-main">
+        <p>MU Calculator Pro v3.0 · Measurement Uncertainty for Energy Meter Calibration</p>
+    </footer>
 
     <!-- Load Modal -->
     <div class="modal" id="load-modal">
-        <div class="modal-content">
-            <h3>📂 Muat Project</h3>
-            <div class="modal-list" id="load-project-list"></div>
-            <div class="modal-actions">
-                <button class="btn btn-secondary" id="btn-load-cancel">Batal</button>
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>📂 Muat Project</h3>
+                <button class="modal-close" id="btn-load-cancel">✕</button>
             </div>
+            <div class="modal-list" id="load-project-list"></div>
         </div>
     </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
 
     <script src="script.js"></script>
 </body>
